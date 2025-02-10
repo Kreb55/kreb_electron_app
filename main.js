@@ -21,25 +21,27 @@ app.whenReady().then(() => {
 
     mainWindow.loadFile('index.html');
 
-    if (!isDev) {
-        autoUpdater.setFeedURL(feedURL);
-        autoUpdater.checkForUpdates();
-
-        autoUpdater.on('update-downloaded', () => {
-            autoUpdater.quitAndInstall();
-        });
-    }
+    autoUpdater.checkForUpdatesAndNotify();
 
     app.on('window-all-closed', () => {
         if (process.platform !== 'darwin') app.quit();
     });
 });
 
-autoUpdater.on("update-available", () => {
-    console.log("Update available");
-});
+autoUpdater.on('update-available', () => {
+    dialog.showMessageBox(mainWindow, {
+      type: 'info',
+      title: 'Güncelleme mevcut',
+      message: 'Yeni bir güncelleme bulundu. Yükleniyor...',
+    });
+  });
 
 autoUpdater.on('update-downloaded', () => {
-    console.log('Update downloaded. Ready to install');
-    autoUpdater.quitAndInstall();
+    dialog.showMessageBox(mainWindow, {
+        type: 'info',
+        title: 'Güncelleme yüklendi',
+        message: 'Uygulama güncellendi. Yeniden başlatılıyor...',
+    }).then(() => {
+        autoUpdater.quitAndInstall();
+    });
 });
