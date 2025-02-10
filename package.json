@@ -1,0 +1,33 @@
+{
+  "name": "kreb_electron_app",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "electron": "^34.1.1",
+    "electron-builder": "^25.1.8",
+    "electron-reloader": "^1.2.3"
+  },
+  "build": {
+    "appId": "com.kreb.electronapp",
+    "productName": "KrebElectronApp",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "Kreb55",
+        "repo": "kreb_electron_app"
+      }
+    ]
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9"
+  }
+}
